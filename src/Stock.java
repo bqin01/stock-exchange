@@ -61,7 +61,7 @@ public class Stock{
     str += asymbol + "(" + aname + ")\n";
     str += order.getShare() + " shares at " + (order.getPrice()==lastprice)?"market":money.format(order.getPrice());
 
-    //somehow give the str to the Trader?
+    order.getTrader().receiveMessage(str);
     neworder = executeOrders(order);
     if(neworder.getShares()!=0){
       if(order.isBuy()) buyQ.add(neworder);
@@ -94,7 +94,7 @@ public class Stock{
       String str = "";
       str += "You " + order.isBuy()?"bought":"sold" + ": " + transacted + " " + asymbol + " at "
                     + money.format(order.getPrice()) + " amt " + money.format(order.getPrice()*transacted);
-      //somehow give the str to the Trader?
+      order.getTrader().receiveMessage(str);
     }
     return order;
   }
