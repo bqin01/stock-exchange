@@ -6,7 +6,7 @@ import java.util.*;
  *
  **/
 public class Stock{
-  public static DecimalFormat money = "0.00";
+  public static java.text.DecimalFormat money = "0.00";
   private double lowprice;
   private double highprice;
   private double lastprice;
