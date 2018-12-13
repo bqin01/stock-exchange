@@ -68,7 +68,7 @@ public class Trader extends java.lang.Object implements java.lang.Comparable<Tra
 
   public void placeOrder(TradeOrder order)
   {
-
+    brokerage.placeOrder(order);
   }
 
   public void receiveMessage(String msg)

@@ -40,7 +40,7 @@ public class Brokerage extends java.lang.Object implements Login
   }
   public void getQuote(java.lang.String symbol, Trader trader)
   {
-
+     trader.getQuote(symbol);
   }
   public int login(java.lang.String name, java.lang.String password) //done
   {
@@ -77,6 +77,6 @@ public class Brokerage extends java.lang.Object implements Login
   }
   public void placeOrder(TradeOrder order)
   {
-
+    thisexchange.placeOrder(order);
   }
 }
