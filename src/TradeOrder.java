@@ -1,10 +1,19 @@
 public class TradeOrder extends java.lang.Object
 {
-
-TradeOrder(Trader trader, java.lang.String symbol, boolean buyOrder, boolean marketOrder, int numShares, double price)
+private Trader trader;
+private String symbol;
+private boolean buyOrder;
+private boolean marketOrder;
+private int numShares;
+private double price;
+public TradeOrder(Trader atrader, java.lang.String asymbol, boolean abuyOrder, boolean amarketOrder, int anumShares, double aprice)
 {
-  public int numShares;
-
+    trader = atrader;
+    symbol = asymbol;
+    buyOrder = abuyOrder;
+    marketOrder = amarketOrder;
+    numShares = anumShares;
+    price = aprice;
 }
 public Trader getTrader()
 {
@@ -40,17 +49,18 @@ public double getPrice()
 }
 public void subtractShares(int shares)
 {
-  if (isSell)
+  if (isSell())
 
   //need to find a way to get the current number of shares otherwsie th
   //this should be pretty much done!!
   {
   //Subtracts a given number of shares from the total number of shares in this trade order.
-    if (shares < numShares );
+    if (shares < numShares )
     {
       throw java.lang.IllegalArgumentException;
-    }
+    }else{
     shares -= numShares;
+    }
   }
 }//should the stockholder have an attribute for number of
 // shares or should we create a counter in here???
