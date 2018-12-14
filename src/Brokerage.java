@@ -23,7 +23,7 @@ public class Brokerage extends java.lang.Object implements Login
     {
       return -2;
     }
-    private boolean uniqueness = true;
+    boolean uniqueness = true;
 
     for (String str: brokers.keySet())
     {
@@ -50,14 +50,14 @@ public class Brokerage extends java.lang.Object implements Login
       {
         if(t.getPassword().equals(password))
         {
-          for (Trader ti: active_brokers.values())
+          for (Trader ti: active_brokers)
           {
-            if (t.equals(ti)
+            if (t.equals(ti))
             {
               return -3;
             }
           }
-          if (!t.hasMessage())
+          if (!t.hasMessages())
           {
             t.receiveMessage("Welcome to SafeTrade!");
           }

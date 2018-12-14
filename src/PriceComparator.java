@@ -1,41 +1,42 @@
 public class PriceComparator extends java.lang.Object implements java.util.Comparator<TradeOrder>
 {
-  PriceComparator()
+  //If statements fixed
+  private boolean ascending;
+  public PriceComparator()
   {
-    private boolean ascending  = true;
+    ascending  = true;
   }
-  PriceComparator(boolean asc)
+  public PriceComparator(boolean asc)
   {
-    private boolean ascending = asc;
+    ascending = asc;
   }
-  private int temp;
-
   public static int compare(TradeOrder order1, TradeOrder order2)
   {
-    if order1.isMarket() && order2.isMarket();
+    int temp;
+    if(order1.isMarket() && order2.isMarket())
     {
       return 0;
     }
-    if order1.isMarket() && order2.isLimit();
+    if(order1.isMarket() && order2.isLimit())
     {
       return -1;
     }
-    if order2.isMarket() && order1.isLimit();
+    if(order2.isMarket() && order1.isLimit())
     {
       return 1;
     }
-    if order1.isLimit() && order2.isLimit();
+    if(order1.isLimit() && order2.isLimit())
     {
-      if ascending = true;
+      if(ascending);
       {
         temp = order1.getPrice() - order2.getPrice();
-        if temp < 0;
+        if (temp < 0)
         {
           return (int)(temp * -100);
         }
         return (int)(temp);
       }
-      if temp > 0;
+      if(temp > 0)
       {
         return (int)(temp * -100);
       }

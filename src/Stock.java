@@ -6,7 +6,7 @@ import java.util.*;
  *
  **/
 public class Stock{
-  public static java.text.DecimalFormat money = "0.00";
+  public static java.text.DecimalFormat money = new java.text.DecimalFormat("0.00");
   private double lowprice;
   private double highprice;
   private double lastprice;
@@ -44,8 +44,8 @@ public class Stock{
   public String getQuote(){
     String str = aname + " (" + asymbol + ")\n";
     str += "Price: " + money.format(lastprice) + "  lo: " + money.format(lowprice) + "  hi: " + money.format(highprice)  + "vol: " + Math.sqrt(vol) + "\n";
-    str += "Ask: " + sellQ.isEmpty()?"none":((sellQ.peek().getPrice()==lastprice)?"market":money.format(sellQ.peek().getPrice()) + "size " + sellQ.peek().getShare());
-    str += "Bid: " + buyQ.isEmpty()?"none":((buyQ.peek().getPrice()==lastprice)?"market":money.format(buyQ.peek().getPrice()) + "size " + buyQ.peek().getShare());
+    str += "Ask: " + (sellQ.isEmpty()?"none":((sellQ.peek().getPrice()==lastprice)?"market":money.format(sellQ.peek().getPrice()))) + "size " + sellQ.peek().getShare();
+    str += "Bid: " + (buyQ.isEmpty()?"none":((buyQ.peek().getPrice()==lastprice)?"market":money.format(buyQ.peek().getPrice()))) + "size " + buyQ.peek().getShare();
     return str;
   }
   /**

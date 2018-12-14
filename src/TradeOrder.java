@@ -57,7 +57,7 @@ public void subtractShares(int shares)
   //Subtracts a given number of shares from the total number of shares in this trade order.
     if (shares < numShares )
     {
-      throw java.lang.IllegalArgumentException;
+      throw new java.lang.IllegalArgumentException("Not enough shares!");
     }else{
     shares -= numShares;
     }

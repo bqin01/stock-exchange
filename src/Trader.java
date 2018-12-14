@@ -22,17 +22,17 @@ public class Trader extends java.lang.Object implements java.lang.Comparable<Tra
 
   public boolean equals(Object other)
   {
-    if(other.getClass == Trader)
-    {
-      if(this.compareTo(other) == 0)
-        return true;
-      else
+      try{
+        if(this.compareTo((Trader)other) == 0)
+          return true;
+        else
+          return false;
+      }
+      catch(ClassCastException e){
+        System.out.println("ClassCastException: comparing Trader to non-Trader");
         return false;
-    }
-    else
-    {
-      throw ClassCastException;
-    }
+      }
+
   }
 
   public String getName()
@@ -42,7 +42,7 @@ public class Trader extends java.lang.Object implements java.lang.Comparable<Tra
 
   public String getPassword()
   {
-    return this.password;
+    return this.pswd;
   }
 
   public void getQuote(String symbol)
@@ -59,10 +59,10 @@ public class Trader extends java.lang.Object implements java.lang.Comparable<Tra
 
   public void openWindow()
   {
-    myWindow = new TraderWindow(this);
+    TraderWindow myWindow = new TraderWindow(this);
     while(!mailbox.isEmpty())
     {
-      myWindw.show(mailbox.remove());
+      myWindow.showMessage(mailbox.remove());
     }
   }
 
