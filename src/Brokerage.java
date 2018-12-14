@@ -36,6 +36,7 @@ public class Brokerage extends java.lang.Object implements Login
     {
       return -3;
     }
+    brokers.put(name,new Trader(this,name,password));
     return 0;
   }
   public void getQuote(java.lang.String symbol, Trader trader)

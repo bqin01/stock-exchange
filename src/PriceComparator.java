@@ -10,9 +10,9 @@ public class PriceComparator extends java.lang.Object implements java.util.Compa
   {
     ascending = asc;
   }
-  public static int compare(TradeOrder order1, TradeOrder order2)
+  public int compare(TradeOrder order1, TradeOrder order2)
   {
-    int temp;
+    double temp;
     if(order1.isMarket() && order2.isMarket())
     {
       return 0;
@@ -27,20 +27,20 @@ public class PriceComparator extends java.lang.Object implements java.util.Compa
     }
     if(order1.isLimit() && order2.isLimit())
     {
-      if(ascending);
+      temp = order1.getPrice() - order2.getPrice();
+      if(ascending)
       {
-        temp = order1.getPrice() - order2.getPrice();
         if (temp < 0)
         {
           return (int)(temp * -100);
         }
-        return (int)(temp);
+        return (int)(temp * 100);
       }
       if(temp > 0)
       {
         return (int)(temp * -100);
       }
-      return (int)(temp);
+      return (int)(temp * 100);
 
     }
 /**
@@ -53,5 +53,6 @@ latter case, the difference returned is cents1 - cents2
  or cents2 - cents1, depending on whether this is an
   ascending or descending comparator (ascending is true or false)
 **/
+return 0;
   }
 }

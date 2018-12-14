@@ -44,8 +44,8 @@ public class Stock{
   public String getQuote(){
     String str = aname + " (" + asymbol + ")\n";
     str += "Price: " + money.format(lastprice) + "  lo: " + money.format(lowprice) + "  hi: " + money.format(highprice)  + "vol: " + Math.sqrt(vol) + "\n";
-    str += "Ask: " + (sellQ.isEmpty()?"none":((sellQ.peek().getPrice()==lastprice)?"market":money.format(sellQ.peek().getPrice()))) + "size " + sellQ.peek().getShare();
-    str += "Bid: " + (buyQ.isEmpty()?"none":((buyQ.peek().getPrice()==lastprice)?"market":money.format(buyQ.peek().getPrice()))) + "size " + buyQ.peek().getShare();
+    str += "Ask: " + (sellQ.isEmpty()?"none":((sellQ.peek().getPrice()==lastprice)?"market":money.format(sellQ.peek().getPrice()))) + "size " + sellQ.peek().getShares();
+    str += "Bid: " + (buyQ.isEmpty()?"none":((buyQ.peek().getPrice()==lastprice)?"market":money.format(buyQ.peek().getPrice()))) + "size " + buyQ.peek().getShares();
     return str;
   }
   /**
@@ -59,10 +59,10 @@ public class Stock{
     String str = "New order: ";
     str += order.isBuy()?"Buy ":"Sell ";
     str += asymbol + "(" + aname + ")\n";
-    str += order.getShare() + " shares at " + (order.getPrice()==lastprice)?"market":money.format(order.getPrice());
+    str += order.getShares() + " shares at " + ((order.getPrice()==lastprice)?"market":money.format(order.getPrice()));
 
     order.getTrader().receiveMessage(str);
-    neworder = executeOrders(order);
+    TradeOrder neworder = executeOrders(order);
     if(neworder.getShares()!=0){
       if(order.isBuy()) buyQ.add(neworder);
       else sellQ.add(neworder);
@@ -72,7 +72,7 @@ public class Stock{
     int transacted = 0;
     if(order.isBuy()){
       while(order.getPrice() >= sellQ.peek().getPrice()){
-        int removal = Math.min(order.getShares(),sellQ.peek.getShares());
+        int removal = Math.min(order.getShares(),sellQ.peek().getShares());
         sellQ.peek().subtractShares(removal);
         order.subtractShares(removal);
         transacted += removal;
@@ -82,7 +82,7 @@ public class Stock{
     }
     if(order.isSell()){
       while(order.getPrice() <= buyQ.peek().getPrice()){
-        int removal = Math.min(order.getShares(),buyQ.peek.getShares());
+        int removal = Math.min(order.getShares(),buyQ.peek().getShares());
         buyQ.peek().subtractShares(removal);
         order.subtractShares(removal);
         transacted += removal;
@@ -92,7 +92,7 @@ public class Stock{
     }
     if(transacted != 0){
       String str = "";
-      str += "You " + order.isBuy()?"bought":"sold" + ": " + transacted + " " + asymbol + " at "
+      str += "You " + (order.isBuy()?"bought":"sold") + ": " + transacted + " " + asymbol + " at "
                     + money.format(order.getPrice()) + " amt " + money.format(order.getPrice()*transacted);
       order.getTrader().receiveMessage(str);
     }
