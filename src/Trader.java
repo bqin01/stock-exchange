@@ -6,6 +6,7 @@ public class Trader extends java.lang.Object implements java.lang.Comparable<Tra
   private String name;
   private String pswd;
   private Queue<String> mailbox;
+  private TraderWindow myWindow;
 
   public Trader(Brokerage brokerage, java.lang.String name, java.lang.String pswd)
   {
@@ -52,17 +53,15 @@ public class Trader extends java.lang.Object implements java.lang.Comparable<Tra
 
   public boolean hasMessages()
   {
-    if(mailbox.isEmpty())
-      return false;
-    return true;
+    return !mailbox.isEmpty();
   }
 
   public void openWindow()
   {
-    TraderWindow myWindow = new TraderWindow(this);
+    myWindow = new TraderWindow(this);
     while(!mailbox.isEmpty())
     {
-      myWindow.showMessage(mailbox.remove());
+      this.myWindow.showMessage(mailbox.remove());
     }
   }
 
@@ -74,6 +73,10 @@ public class Trader extends java.lang.Object implements java.lang.Comparable<Tra
   public void receiveMessage(String msg)
   {
     mailbox.add(msg);
+    while(hasMessages())
+    {
+      this.myWindow.showMessage(mailbox.remove());
+    }
   }
 
 

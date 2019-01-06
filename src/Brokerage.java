@@ -24,7 +24,6 @@ public class Brokerage extends java.lang.Object implements Login
       return -2;
     }
     boolean uniqueness = true;
-
     for (String str: brokers.keySet())
     {
       if (str.equals(name))
@@ -41,7 +40,7 @@ public class Brokerage extends java.lang.Object implements Login
   }
   public void getQuote(java.lang.String symbol, Trader trader)
   {
-     trader.getQuote(symbol);
+    trader.receiveMessage(thisexchange.getQuote(symbol));
   }
   public int login(java.lang.String name, java.lang.String password) //done
   {
@@ -58,6 +57,7 @@ public class Brokerage extends java.lang.Object implements Login
               return -3;
             }
           }
+          t.openWindow();
           if (!t.hasMessages())
           {
             t.receiveMessage("Welcome to SafeTrade!");
@@ -69,8 +69,6 @@ public class Brokerage extends java.lang.Object implements Login
       return -2;
     }
     return -1;
-
-
   }
   public void logout(Trader trader)
   {

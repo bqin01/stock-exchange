@@ -17,6 +17,6 @@ public class StockExchange
       stocks.get(order.getSymbol()).placeOrder(order);
     }
     public String getQuote(String symbol){
-      return stocks.get(symbol).getQuote();
+      return (stocks.get(symbol)).getQuote();
     }
 }
